@@ -13,7 +13,11 @@ async function hop(label: string, init: RequestInit) {
 
 export async function GET() {
   const body = JSON.stringify({ secret: "senha-errada", name: "x", email: "x@example.com", acceptedTerms: true, governmentLink: false });
+  const real = JSON.stringify({ secret: process.env.APPS_SCRIPT_SECRET, name: "TESTE - pode apagar", email: "teste-claude@example.com", acceptedTerms: true, governmentLink: false });
+  const sec = process.env.APPS_SCRIPT_SECRET ?? "";
   return Response.json([
+    { secretLen: sec.length, secretStart: sec.slice(0, 2) },
+    await hop("REAL", { headers: { "Content-Type": "text/plain" }, body: real }),
     await hop("plain", { headers: { "Content-Type": "text/plain" }, body }),
     await hop("charset", { headers: { "Content-Type": "text/plain;charset=utf-8" }, body }),
     await hop("no-store", { headers: { "Content-Type": "text/plain" }, body, cache: "no-store" }),
