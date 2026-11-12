@@ -1,3 +1,6 @@
+// Dá folga para o Apps Script responder (ele pode demorar na primeira execução)
+export const maxDuration = 30;
+
 import { saveRsvpToSheet } from "@/lib/sheets";
 import { fieldErrors, rsvpSchema } from "@/lib/rsvp-schema";
 

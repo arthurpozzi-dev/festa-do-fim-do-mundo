@@ -16,6 +16,7 @@ export async function saveRsvpToSheet(rsvp: SheetRsvp) {
   const secret = process.env.APPS_SCRIPT_SECRET;
   if (!url || !secret) throw new Error("APPS_SCRIPT_URL/APPS_SCRIPT_SECRET não configurados");
 
+  const started = Date.now();
   const res = await fetch(url, {
     method: "POST",
     // text/plain: o Apps Script lê o corpo cru em e.postData.contents
@@ -23,10 +24,18 @@ export async function saveRsvpToSheet(rsvp: SheetRsvp) {
     body: JSON.stringify({ ...rsvp, secret }),
     redirect: "follow",
     cache: "no-store",
-    signal: AbortSignal.timeout(15_000),
+    // o Apps Script pode demorar na primeira execução ("cold start")
+    signal: AbortSignal.timeout(28_000),
   });
 
-  const json = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+  const text = await res.text();
+  console.info(`[sheets] ${res.status} em ${Date.now() - started}ms`);
+  let json: { ok?: boolean; error?: string } | null = null;
+  try {
+    json = JSON.parse(text);
+  } catch {
+    console.error("[sheets] resposta não-JSON:", text.slice(0, 300));
+  }
   if (!res.ok || !json?.ok) {
     throw new Error(`Apps Script: ${json?.error ?? `HTTP ${res.status}`}`);
   }
