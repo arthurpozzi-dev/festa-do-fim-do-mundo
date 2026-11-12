@@ -195,8 +195,7 @@ export default function RsvpModal({ onClose }: { onClose: () => void }) {
                     className="size-[13px] shrink-0 cursor-pointer appearance-none border border-white checked:bg-white"
                   />
                   <span className="text-justify">
-                    Você possui ou já possuiu algum tipo de ligação com algum
-                    órgão governamental? (Assinale caso &ldquo;sim&rdquo; — e
+                    Você possui ou já possuiu algum tipo de ligação/vinculo com o Estado de Israel? (Assinale caso &ldquo;sim&rdquo; — e
                     não minta, pois saberemos)
                   </span>
                 </label>
