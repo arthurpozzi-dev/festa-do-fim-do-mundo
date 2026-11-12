@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-helvetica: var(--ff-helvetica), "Helvetica Neue", Arial, sans-serif;
+  --font-kremlin: var(--ff-kremlin), serif;
+  --font-sloop: var(--ff-sloop), cursive;
+  --font-gothic-pixels: var(--ff-gothic-pixels), serif;
+  --font-acid: var(--ff-acid), sans-serif;
+  --font-old-london: var(--ff-old-london), serif;
+
+  --color-blood: #e3060f;
+
+  --color-mint: #3dffb0;
+}
+
+/* Texto padrão em Helvetica: regular, justificado, mesmo tamanho no site todo */
+@utility text-body {
+  font-family: var(--font-helvetica);
+  font-weight: 400;
+  font-size: 3.8vw;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-align: justify;
+  text-transform: uppercase;
+  hyphens: auto;
+}
+
+/* Linha forçada a ocupar a largura toda (justificado até a última linha) */
+@utility line-justify {
+  display: block;
+  text-align: justify;
+  text-align-last: justify;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  overflow-x: hidden;
+}
