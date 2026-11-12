@@ -1,13 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useRsvp } from "@/components/rsvp/RsvpProvider";
 import GifFrame from "@/components/ui/GifFrame";
-import PzModal from "@/components/pz/PzModal";
 import { scrambleIn } from "@/lib/scramble";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -39,7 +38,6 @@ const paragraph = "relative z-10 text-body";
 export default function Informacoes() {
   const root = useRef<HTMLElement>(null);
   const { open: openRsvp } = useRsvp();
-  const [pzOpen, setPzOpen] = useState(false);
 
   useGSAP(
     () => {
@@ -213,17 +211,6 @@ export default function Informacoes() {
             — Porém, não nos responsabilizamos pelos efeitos colaterais/secundários dessa decisão.
           </p>
         </div>
-
-        <button
-          data-reveal
-          type="button"
-          onClick={() => setPzOpen(true)}
-          aria-haspopup="dialog"
-          className="relative z-10 mt-[8vw] font-helvetica text-[5.2vw] leading-none font-bold text-blood uppercase underline decoration-2 underline-offset-[1vw] transition-opacity hover:opacity-70 md:mt-[3vw] md:text-[1.6vw] md:underline-offset-[0.4vw]"
-        >
-          [Não sei quem é PZ]
-        </button>
-        {pzOpen && <PzModal onClose={() => setPzOpen(false)} />}
       </div>
 
       </div>
