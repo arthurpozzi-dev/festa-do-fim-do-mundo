@@ -29,7 +29,10 @@ const HEADERS = [
   "Aceitou os termos",
   "Ligação com órgão governamental",
   "Atualizado em",
+  "WhatsApp",
 ];
+const COL_UPDATED = 6;
+const COL_WHATSAPP = 7;
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -41,7 +44,8 @@ function doPost(e) {
 
     const name = String(data.name || "").trim().slice(0, 80);
     const email = String(data.email || "").trim().toLowerCase().slice(0, 160);
-    if (!name || !email || data.acceptedTerms !== true) {
+    const whatsapp = String(data.whatsapp || "").trim().slice(0, 30);
+    if (!name || !email || !whatsapp || data.acceptedTerms !== true) {
       return json({ ok: false, error: "dados inválidos" });
     }
 
@@ -58,9 +62,10 @@ function doPost(e) {
     const existing = findRowByEmail(sheet, email);
     if (existing) {
       sheet.getRange(existing, 2, 1, row.length).setValues([row]);
-      sheet.getRange(existing, 6).setValue(now);
+      sheet.getRange(existing, COL_UPDATED).setValue(now);
+      sheet.getRange(existing, COL_WHATSAPP).setValue(whatsapp);
     } else {
-      sheet.appendRow([now].concat(row).concat([""]));
+      sheet.appendRow([now].concat(row).concat(["", whatsapp]));
     }
 
     return json({ ok: true, planilha: sheet.getParent().getName(), aba: SHEET_NAME });
@@ -101,6 +106,10 @@ function getSheet() {
     sheet.appendRow(HEADERS);
     sheet.setFrozenRows(1);
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight("bold");
+  }
+  // Planilha criada antes do campo de WhatsApp: adiciona o cabeçalho que falta
+  if (sheet.getRange(1, COL_WHATSAPP).getValue() === "") {
+    sheet.getRange(1, COL_WHATSAPP).setValue("WhatsApp").setFontWeight("bold");
   }
   return sheet;
 }

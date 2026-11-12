@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Modal from "@/components/ui/Modal";
+import { formatPhone } from "@/lib/phone";
 import {
   fieldErrors,
   rsvpSchema,
@@ -25,6 +26,7 @@ export default function RsvpModal({ onClose }: { onClose: () => void }) {
     const data = {
       name: String(form.get("name") ?? ""),
       email: String(form.get("email") ?? ""),
+      whatsapp: String(form.get("whatsapp") ?? ""),
       acceptedTerms: form.get("acceptedTerms") === "on",
       governmentLink: form.get("governmentLink") === "on",
       website: String(form.get("website") ?? ""),
@@ -134,6 +136,33 @@ export default function RsvpModal({ onClose }: { onClose: () => void }) {
                 />
                 {errors.email && (
                   <FieldError id="rsvp-email-err">{errors.email}</FieldError>
+                )}
+              </div>
+
+              <div data-modal-item className="mt-7">
+                <label
+                  htmlFor="rsvp-whatsapp"
+                  className="mb-2 block text-[20px] leading-none"
+                >
+                  WhatsApp
+                </label>
+                <input
+                  id="rsvp-whatsapp"
+                  name="whatsapp"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel-national"
+                  placeholder="(DDD) 99999-9999"
+                  maxLength={20}
+                  onChange={(e) => {
+                    e.currentTarget.value = formatPhone(e.currentTarget.value);
+                  }}
+                  aria-invalid={!!errors.whatsapp}
+                  aria-describedby={errors.whatsapp ? "rsvp-whatsapp-err" : undefined}
+                  className={inputClass}
+                />
+                {errors.whatsapp && (
+                  <FieldError id="rsvp-whatsapp-err">{errors.whatsapp}</FieldError>
                 )}
               </div>
 

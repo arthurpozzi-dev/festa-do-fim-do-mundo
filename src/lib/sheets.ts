@@ -3,6 +3,7 @@ import "server-only";
 export type SheetRsvp = {
   name: string;
   email: string;
+  whatsapp: string;
   acceptedTerms: boolean;
   governmentLink: boolean;
 };
