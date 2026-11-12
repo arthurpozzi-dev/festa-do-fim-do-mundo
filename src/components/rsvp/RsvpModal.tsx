@@ -62,7 +62,7 @@ export default function RsvpModal({ onClose }: { onClose: () => void }) {
   return (
     <Modal onClose={onClose} labelledBy="rsvp-title" initialFocus={firstInput}>
       {(close) => (
-        <div className="mx-auto flex min-h-full max-w-[480px] flex-col px-[13%] pt-[52px] pb-14">
+        <div className="mx-auto flex min-h-full max-w-[480px] flex-col px-[min(13vw,62px)] pt-[52px] pb-14 md:justify-center">
           <h2 id="rsvp-title" data-modal-item className="mx-auto mb-11 w-[95%]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
