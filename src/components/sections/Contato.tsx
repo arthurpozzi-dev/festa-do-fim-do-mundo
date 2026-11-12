@@ -43,7 +43,7 @@ export default function Contato() {
 
   return (
     <footer ref={root} id="contato" className="bg-black text-white">
-      <div className="relative h-[57vw] overflow-hidden">
+      <div className="relative h-[57vw] overflow-hidden md:h-[36vw]">
         <div data-parallax className="absolute -top-[30%] -left-[8%] h-[160%] w-[123%]">
           <Image
             src="/images/pintura.jpg"
@@ -55,9 +55,9 @@ export default function Contato() {
         </div>
         <div aria-hidden className="absolute inset-0 bg-black/25" />
 
-        <div className="relative px-[2.2vw] pt-[8vw]">
+        <div className="relative px-[2.2vw] pt-[8vw] md:px-[4vw] md:pt-[6vw]">
           {/* Texto branco com mix-blend-difference: inverte as cores da pintura */}
-          <h2 className="font-acid text-[14.4vw] leading-[1.05] text-white uppercase mix-blend-difference">
+          <h2 className="font-acid text-[14.4vw] leading-[1.05] text-white uppercase mix-blend-difference md:text-[8.5vw]">
             <span data-scramble className="block whitespace-nowrap">
               Para informações
             </span>
@@ -74,15 +74,15 @@ export default function Contato() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-[6vw] inline-block font-kremlin text-[7.6vw] leading-none uppercase underline decoration-1 underline-offset-[1vw]"
+            className="mt-[6vw] inline-block font-kremlin text-[7.6vw] leading-none uppercase underline decoration-1 underline-offset-[1vw] transition-opacity hover:opacity-70 md:mt-[3vw] md:text-[3vw] md:underline-offset-[0.4vw]"
           >
             Contato do WhatsApp do PZ
           </a>
         </div>
       </div>
 
-      <div className="flex h-[14vw] min-h-14 items-center px-[6vw]">
-        <p data-scramble className="line-justify w-full text-body">
+      <div className="flex h-[14vw] min-h-14 items-center px-[6vw] md:h-24 md:justify-center">
+        <p data-scramble className="line-justify w-full text-body md:w-auto md:[text-align-last:center]">
           Não nos responsabilizamos por recaídas
         </p>
       </div>

@@ -13,11 +13,17 @@
   --color-mint: #3dffb0;
 }
 
+:root {
+  /* 3.8vw no celular; trava em 18px em telas maiores (em variável para o
+     Tailwind não simplificar o min()) */
+  --text-body-size: min(3.8vw, 1.125rem);
+}
+
 /* Texto padrão em Helvetica: regular, justificado, mesmo tamanho no site todo */
 @utility text-body {
   font-family: var(--font-helvetica);
   font-weight: 400;
-  font-size: 3.8vw;
+  font-size: var(--text-body-size);
   line-height: 1.05;
   letter-spacing: -0.015em;
   text-align: justify;

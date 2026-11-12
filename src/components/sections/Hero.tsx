@@ -67,13 +67,13 @@ export default function Hero() {
         {/* ®2007 vertical */}
         <p
           data-hero-year
-          className="absolute top-3 right-2 rotate-180 font-helvetica text-[34px] leading-none tracking-tight [writing-mode:vertical-rl]"
+          className="absolute top-3 right-2 rotate-180 font-helvetica text-[34px] leading-none tracking-tight [writing-mode:vertical-rl] md:top-8 md:right-6 md:text-[64px]"
         >
           <span data-scramble="0123456789®">®2007</span>
         </p>
 
         {/* Logo da festa */}
-        <h1 className="absolute top-1/2 left-1/2 w-[88%] max-w-[480px] -translate-x-1/2 -translate-y-1/2">
+        <h1 className="absolute top-1/2 left-1/2 w-[88%] max-w-[480px] -translate-x-1/2 -translate-y-1/2 md:w-[58vw] md:max-w-[960px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             data-hero-logo
@@ -87,7 +87,7 @@ export default function Hero() {
         <a
           data-hero-cta
           href="#confirme"
-          className="absolute top-[73%] right-10 text-right font-kremlin text-[22px] leading-[1.15] uppercase"
+          className="absolute top-[73%] right-10 text-right font-kremlin text-[22px] leading-[1.15] uppercase transition-opacity hover:opacity-70 md:top-auto md:right-[6vw] md:bottom-14 md:text-[36px]"
         >
           <span data-scramble>Clique</span>
           <br />
@@ -98,7 +98,7 @@ export default function Hero() {
         </a>
 
         {/* Descrição */}
-        <p className="absolute bottom-7 left-4 w-[52vw] text-body">
+        <p className="absolute bottom-7 left-4 w-[52vw] text-body md:bottom-14 md:left-[4vw] md:w-[300px]">
           <span className="line-justify">
             <span data-scramble>Festa dedicada</span>
           </span>
@@ -117,12 +117,12 @@ export default function Hero() {
       {/* Tarja BABT */}
       <div
         data-hero-bar
-        className="relative z-10 flex h-[72px] shrink-0 items-center justify-center bg-black"
+        className="relative z-10 flex h-[72px] shrink-0 items-center justify-center bg-black md:h-24"
       >
         <div className="flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/babt.svg" alt="BABT" className="h-[32px] w-auto" />
-          <span className="-ml-1 font-sloop text-[30px] leading-none">Organization</span>
+          <img src="/images/babt.svg" alt="BABT" className="h-[32px] w-auto md:h-[44px]" />
+          <span className="-ml-1 font-sloop text-[30px] leading-none md:text-[42px]">Organization</span>
         </div>
       </div>
     </section>

@@ -29,7 +29,7 @@ export default function BabtMarquee({ className = "" }: { className?: string }) 
 
   const group = Array.from({ length: ITEMS }, (_, i) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img key={i} src="/images/babt.svg" alt="" className="h-[34px] w-auto shrink-0" />
+    <img key={i} src="/images/babt.svg" alt="" className="h-[34px] w-auto shrink-0 md:h-[44px]" />
   ));
 
   return (
@@ -37,7 +37,7 @@ export default function BabtMarquee({ className = "" }: { className?: string }) 
       ref={root}
       role="img"
       aria-label="BABT Organization"
-      className={`flex h-[58px] items-center overflow-hidden bg-black ${className}`}
+      className={`flex h-[58px] items-center overflow-hidden bg-black md:h-[76px] ${className}`}
     >
       <div data-marquee-track className="flex w-max shrink-0 items-center">
         <div className="flex shrink-0 items-center gap-[42px] pr-[42px]">{group}</div>

@@ -59,35 +59,35 @@ export default function Confirme() {
 
   return (
     <section ref={root} id="confirme" className="relative bg-white text-black">
-      <div className="relative h-[136vw] overflow-hidden">
+      <div className="relative h-[136vw] overflow-hidden md:h-[56vw]">
         {/* Imagem da máscara (direita, topo) */}
-        <div className="absolute top-0 -right-[3%] h-[80vw] w-[27%] overflow-hidden">
+        <div className="absolute top-0 -right-[3%] h-[80vw] w-[27%] overflow-hidden md:-right-[1%] md:h-[40vw] md:w-[24%]">
           <div data-parallax="22" className="absolute inset-x-0 -top-[50%] h-[200%]">
             <Image
               src="/images/confirme-mascara.jpg"
               alt=""
               fill
-              sizes="(max-width: 768px) 30vw, 400px"
+              sizes="(max-width: 768px) 30vw, 25vw"
               className="object-cover object-[62%_center]"
             />
           </div>
         </div>
 
         {/* Imagem da coluna (esquerda, embaixo) */}
-        <div className="absolute bottom-0 -left-[3%] h-[90vw] w-[31%] overflow-hidden">
+        <div className="absolute bottom-0 -left-[3%] h-[90vw] w-[31%] overflow-hidden md:-left-[1%] md:h-[38vw] md:w-[22%]">
           <div data-parallax="22" className="absolute inset-x-0 -top-[50%] h-[200%]">
             <Image
               src="/images/confirme-coluna.jpg"
               alt=""
               fill
-              sizes="(max-width: 768px) 35vw, 400px"
+              sizes="(max-width: 768px) 35vw, 25vw"
               className="object-cover object-[42%_center]"
             />
           </div>
         </div>
 
         {/* Topo */}
-        <p className="absolute top-[1vw] left-[2.6%] w-[48%] text-body text-white mix-blend-difference">
+        <p className="absolute top-[1vw] left-[2.6%] w-[48%] text-body text-white mix-blend-difference md:top-[1.5vw] md:left-[2%] md:w-[240px]">
           <span data-scramble className="line-justify">
             Festa do fim do
           </span>
@@ -100,20 +100,20 @@ export default function Confirme() {
         <h2 className="absolute inset-0 text-white mix-blend-difference">
           <span
             data-scramble
-            className="absolute top-[29vw] left-[9%] font-gothic-pixels text-[17vw] leading-none"
+            className="absolute top-[29vw] left-[9%] font-gothic-pixels text-[17vw] leading-none md:top-[8vw] md:left-[26%] md:text-[11vw]"
           >
             Confirme
           </span>
-          <span className="absolute top-[43.5vw] left-[11%] flex items-center gap-[9vw] font-helvetica text-[16vw] leading-none font-bold"
+          <span className="absolute top-[43.5vw] left-[11%] flex items-center gap-[9vw] font-helvetica text-[16vw] leading-none font-bold md:top-[20vw] md:left-[28%] md:gap-[5vw] md:text-[10vw]"
           >
             <span data-scramble>sua</span>
-            <span data-scramble="®©™" className="text-[11vw] font-normal">
+            <span data-scramble="®©™" className="text-[11vw] font-normal md:text-[7vw]">
               ®
             </span>
           </span>
           <span
             data-scramble
-            className="absolute top-[57.5vw] left-[35%] font-acid text-[16vw] leading-none"
+            className="absolute top-[57.5vw] left-[35%] font-acid text-[16vw] leading-none md:top-[30vw] md:left-[40%] md:text-[10vw]"
           >
             PRESENÇA
           </span>
@@ -125,13 +125,13 @@ export default function Confirme() {
           type="button"
           onClick={openRsvp}
           aria-haspopup="dialog"
-          className="absolute top-[83vw] left-[14%] flex h-[20vw] w-[72%] items-center justify-center border-2 border-blood font-acid text-[14vw] leading-none text-blood transition-colors active:bg-blood active:text-white"
+          className="absolute top-[83vw] left-[14%] flex h-[20vw] w-[72%] items-center justify-center border-2 border-blood font-acid text-[14vw] leading-none text-blood transition-colors hover:bg-blood hover:text-white active:bg-blood active:text-white md:top-[43vw] md:left-[35%] md:h-[6.5vw] md:w-[30%] md:border-[3px] md:text-[4.6vw]"
         >
           <span data-scramble>CLIQUE AQUI</span>
         </button>
 
         {/* Rodapé da sessão */}
-        <p className="absolute top-[125vw] left-[53%] w-[45%] text-body text-white mix-blend-difference">
+        <p className="absolute top-[125vw] left-[53%] w-[45%] text-body text-white mix-blend-difference md:top-auto md:bottom-[1.5vw] md:left-auto md:right-[2%] md:w-[260px]">
           <span data-scramble className="line-justify">
             Mais informações
           </span>
