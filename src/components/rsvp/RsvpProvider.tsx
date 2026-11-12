@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { preload } from "react-dom";
 import RsvpModal from "./RsvpModal";
 
 type RsvpContextValue = { open: () => void; close: () => void };
@@ -15,6 +16,9 @@ export function useRsvp() {
 }
 
 export default function RsvpProvider({ children }: { children: React.ReactNode }) {
+  // baixa o título do formulário junto com a página (senão ele chega atrasado no popup)
+  preload("/images/titulo-formulario.svg", { as: "image" });
+
   const [isOpen, setIsOpen] = useState(false);
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);
