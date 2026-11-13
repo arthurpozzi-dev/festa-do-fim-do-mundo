@@ -19,6 +19,15 @@ export default function RsvpModal({ onClose }: { onClose: () => void }) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<RsvpFieldErrors>({});
   const [serverError, setServerError] = useState("");
+  const [confirmed, setConfirmed] = useState<string[]>([]);
+
+  // Volta para o formulário vazio para confirmar mais alguém
+  function confirmAnother() {
+    setErrors({});
+    setServerError("");
+    setStatus("idle");
+    requestAnimationFrame(() => firstInput.current?.focus());
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -51,6 +60,7 @@ export default function RsvpModal({ onClose }: { onClose: () => void }) {
         setStatus("error");
         return;
       }
+      setConfirmed((list) => [...list, parsed.data.name]);
       setStatus("success");
     } catch {
       setServerError("Sem conexão. Tente de novo.");
@@ -74,13 +84,25 @@ export default function RsvpModal({ onClose }: { onClose: () => void }) {
           {status === "success" ? (
             <div data-modal-item className="text-center font-acid uppercase">
               <p className="text-[34px] leading-none">Presença confirmada</p>
+              {confirmed.length > 0 && (
+                <p className="mt-4 font-helvetica text-[15px] leading-[1.3] text-white/80">
+                  {confirmed.join(" · ")}
+                </p>
+              )}
               <p className="mt-4 text-[13px]">
                 O endereço chega no seu WhatsApp no dia da festa.
               </p>
               <button
                 type="button"
+                onClick={confirmAnother}
+                className="mt-10 h-14 w-full border-2 border-white text-[24px] uppercase transition-colors hover:bg-white hover:text-black"
+              >
+                Confirmar outro nome
+              </button>
+              <button
+                type="button"
                 onClick={close}
-                className="mt-10 h-14 w-full border-2 border-white text-[24px] uppercase"
+                className="mt-4 h-14 w-full text-[20px] uppercase underline underline-offset-4 transition-opacity hover:opacity-70"
               >
                 Fechar
               </button>

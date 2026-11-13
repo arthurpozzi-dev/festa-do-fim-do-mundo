@@ -190,12 +190,9 @@ export default function Informacoes() {
 
         <div className="mt-[4vw] space-y-[5vw] md:mt-[1.5vw] md:space-y-[1.6vw]">
           <p data-reveal className={paragraph}>
-            A equipe de organização{" "}
-            <Red>
-              B.A.B.T™ [<bdi lang="ar">منظمة</bdi>]
-            </Red>{" "}
-            fornecerá de 10 a 20 litros de <Red>vodka</Red> e possivelmente algum outro
-            complemento — porém, é recomendado que leve <Red>algo para usufruir</Red>.
+            A festa será <Red>open cooler</Red>, então <Red>traga sua bebida</Red> — porém, a
+            equipe de organização <Red>B.A.B.T™</Red> irá oferecer <Red>open sucão</Red> (vodka +
+            o que estiver mais barato no mercado).
           </p>
           <GifFrame
             src="/images/gifs/pilulas.gif"
