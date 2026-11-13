@@ -100,7 +100,7 @@ export default function Hero() {
         {/* Descrição */}
         <p className="absolute bottom-7 left-4 w-[52vw] text-body md:bottom-14 md:left-[4vw] md:w-[300px]">
           <span className="line-justify">
-            <span data-scramble>Festa dedicada</span>
+            <span data-scramble>Afterzinho dedicado</span>
           </span>
           <span className="line-justify">
             <span data-scramble>À formatura da</span>
