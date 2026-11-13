@@ -190,6 +190,13 @@ export default function RsvpModal({ onClose }: { onClose: () => void }) {
                   {status === "sending" ? "..." : "Enviar"}
                 </button>
               </div>
+
+              <p
+                data-modal-item
+                className="mt-5 text-center font-helvetica text-[12px] leading-[1.3] text-white/70"
+              >
+                *Após confirmar sua presença, poderá adicionar mais nomes.
+              </p>
             </form>
           )}
         </div>
