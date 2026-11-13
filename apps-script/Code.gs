@@ -4,8 +4,8 @@
  * Como instalar:
  * 1. Crie uma planilha no Google Sheets.
  * 2. Extensões > Apps Script. Apague o que tiver e cole este arquivo inteiro.
- * 3. Troque o SECRET abaixo por uma senha sua (a mesma vai no APPS_SCRIPT_SECRET da Vercel)
- *    e cole em SPREADSHEET_ID o ID da planilha (o trecho da URL entre /d/ e /edit).
+ * 3. Troque o SECRET abaixo por uma senha sua (a mesma vai no APPS_SCRIPT_SECRET da Vercel).
+ *    Opcional: cole em SPREADSHEET_ID o ID da planilha (o trecho da URL entre /d/ e /edit).
  * 4. Implantar > Nova implantação > tipo "App da Web":
  *      - Executar como: Eu
  *      - Quem pode acessar: Qualquer pessoa
@@ -19,20 +19,13 @@
  */
 
 const SECRET = "TROQUE-POR-UMA-SENHA";
-// ID da planilha: docs.google.com/spreadsheets/d/<ESTE TRECHO>/edit
+// ID da planilha: docs.google.com/spreadsheets/d/<ESTE TRECHO>/edit (opcional)
 const SPREADSHEET_ID = "COLE-O-ID-DA-PLANILHA";
 const SHEET_NAME = "Confirmações";
-const HEADERS = [
-  "Confirmado em",
-  "Nome/Vulgo",
-  "E-mail",
-  "Aceitou os termos",
-  "Ligação com órgão governamental",
-  "Atualizado em",
-  "WhatsApp",
-];
-const COL_UPDATED = 6;
-const COL_WHATSAPP = 7;
+const HEADERS = ["Confirmado em", "Nome/Vulgo", "WhatsApp", "Atualizado em"];
+const COL_NAME = 2;
+const COL_WHATSAPP = 3;
+const COL_UPDATED = 4;
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -43,29 +36,21 @@ function doPost(e) {
     if (data.secret !== SECRET) return json({ ok: false, error: "não autorizado" });
 
     const name = String(data.name || "").trim().slice(0, 80);
-    const email = String(data.email || "").trim().toLowerCase().slice(0, 160);
     const whatsapp = String(data.whatsapp || "").trim().slice(0, 30);
-    if (!name || !email || !whatsapp || data.acceptedTerms !== true) {
+    if (!name || digits(whatsapp).length < 10) {
       return json({ ok: false, error: "dados inválidos" });
     }
 
     const sheet = getSheet();
     const now = new Date();
-    const row = [
-      name,
-      email,
-      "Sim",
-      data.governmentLink === true ? "Sim" : "Não",
-    ];
 
-    // Mesmo e-mail de novo: atualiza a linha em vez de duplicar
-    const existing = findRowByEmail(sheet, email);
+    // Mesmo WhatsApp de novo: atualiza o nome em vez de duplicar a linha
+    const existing = findRowByWhatsapp(sheet, whatsapp);
     if (existing) {
-      sheet.getRange(existing, 2, 1, row.length).setValues([row]);
+      sheet.getRange(existing, COL_NAME).setValue(name);
       sheet.getRange(existing, COL_UPDATED).setValue(now);
-      sheet.getRange(existing, COL_WHATSAPP).setValue(whatsapp);
     } else {
-      sheet.appendRow([now].concat(row).concat(["", whatsapp]));
+      sheet.appendRow([now, name, whatsapp, ""]);
     }
 
     return json({ ok: true, planilha: sheet.getParent().getName(), aba: SHEET_NAME });
@@ -100,28 +85,37 @@ function getSheet() {
     ? SpreadsheetApp.openById(SPREADSHEET_ID)
     : SpreadsheetApp.getActiveSpreadsheet();
   if (!ss) throw new Error("Planilha não encontrada: preencha SPREADSHEET_ID no Code.gs");
+
   let sheet = ss.getSheetByName(SHEET_NAME);
+
+  // Aba no formato antigo (com e-mail e checkboxes): guarda com outro nome e começa uma nova
+  if (sheet && sheet.getRange(1, COL_WHATSAPP).getValue() !== "WhatsApp") {
+    sheet.setName(SHEET_NAME + " (antigo)");
+    sheet = null;
+  }
+
   if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
+    sheet = ss.insertSheet(SHEET_NAME, 0);
     sheet.appendRow(HEADERS);
     sheet.setFrozenRows(1);
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight("bold");
   }
-  // Planilha criada antes do campo de WhatsApp: adiciona o cabeçalho que falta
-  if (sheet.getRange(1, COL_WHATSAPP).getValue() === "") {
-    sheet.getRange(1, COL_WHATSAPP).setValue("WhatsApp").setFontWeight("bold");
-  }
   return sheet;
 }
 
-function findRowByEmail(sheet, email) {
+function findRowByWhatsapp(sheet, whatsapp) {
   const last = sheet.getLastRow();
   if (last < 2) return null;
-  const emails = sheet.getRange(2, 3, last - 1, 1).getValues();
-  for (let i = 0; i < emails.length; i++) {
-    if (String(emails[i][0]).trim().toLowerCase() === email) return i + 2;
+  const target = digits(whatsapp);
+  const values = sheet.getRange(2, COL_WHATSAPP, last - 1, 1).getValues();
+  for (let i = 0; i < values.length; i++) {
+    if (digits(values[i][0]) === target) return i + 2;
   }
   return null;
+}
+
+function digits(value) {
+  return String(value || "").replace(/\D/g, "");
 }
 
 function json(obj) {

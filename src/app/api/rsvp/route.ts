@@ -20,12 +20,12 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, email, whatsapp, acceptedTerms, governmentLink, website } = parsed.data;
+  const { name, whatsapp, website } = parsed.data;
   // Bot preencheu o honeypot: finge sucesso e não grava nada
   if (website) return Response.json({ ok: true });
 
   try {
-    await saveRsvpToSheet({ name, email, whatsapp, acceptedTerms, governmentLink });
+    await saveRsvpToSheet({ name, whatsapp });
     return Response.json({ ok: true });
   } catch (err) {
     console.error("[rsvp] falha ao salvar na planilha", err);

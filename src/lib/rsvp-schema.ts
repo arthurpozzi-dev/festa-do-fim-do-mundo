@@ -8,14 +8,11 @@ export const rsvpSchema = z.object({
     .trim()
     .min(2, "Escreva seu nome ou vulgo")
     .max(80, "Nome muito longo"),
-  email: z.string().trim().toLowerCase().max(160).pipe(z.email("E-mail inválido")),
   /** obrigatório; sai normalizado como (16) 99999-9999 */
   whatsapp: z
     .string("Escreva seu WhatsApp com DDD")
     .refine(isValidPhone, "WhatsApp inválido: escreva com DDD")
     .transform(formatPhone),
-  acceptedTerms: z.literal(true, "Você precisa aceitar os termos"),
-  governmentLink: z.boolean().default(false),
   /** honeypot anti-spam: humanos deixam vazio */
   website: z.string().optional(),
 });

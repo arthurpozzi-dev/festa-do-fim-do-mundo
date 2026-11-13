@@ -25,10 +25,7 @@ export default function RsvpModal({ onClose }: { onClose: () => void }) {
     const form = new FormData(e.currentTarget);
     const data = {
       name: String(form.get("name") ?? ""),
-      email: String(form.get("email") ?? ""),
       whatsapp: String(form.get("whatsapp") ?? ""),
-      acceptedTerms: form.get("acceptedTerms") === "on",
-      governmentLink: form.get("governmentLink") === "on",
       website: String(form.get("website") ?? ""),
     };
 
@@ -78,7 +75,7 @@ export default function RsvpModal({ onClose }: { onClose: () => void }) {
             <div data-modal-item className="text-center font-acid uppercase">
               <p className="text-[34px] leading-none">Presença confirmada</p>
               <p className="mt-4 text-[13px]">
-                O endereço chega no seu e-mail no dia da festa.
+                O endereço chega no seu WhatsApp no dia da festa.
               </p>
               <button
                 type="button"
@@ -118,33 +115,10 @@ export default function RsvpModal({ onClose }: { onClose: () => void }) {
 
               <div data-modal-item className="mt-7">
                 <label
-                  htmlFor="rsvp-email"
-                  className="mb-2 block text-[20px] leading-none"
-                >
-                  E-mail para receber o endereço
-                </label>
-                <input
-                  id="rsvp-email"
-                  name="email"
-                  type="email"
-                  inputMode="email"
-                  autoComplete="email"
-                  placeholder="Escreva seu e-mail"
-                  aria-invalid={!!errors.email}
-                  aria-describedby={errors.email ? "rsvp-email-err" : undefined}
-                  className={inputClass}
-                />
-                {errors.email && (
-                  <FieldError id="rsvp-email-err">{errors.email}</FieldError>
-                )}
-              </div>
-
-              <div data-modal-item className="mt-7">
-                <label
                   htmlFor="rsvp-whatsapp"
                   className="mb-2 block text-[20px] leading-none"
                 >
-                  WhatsApp
+                  WhatsApp para contato
                 </label>
                 <input
                   id="rsvp-whatsapp"
@@ -164,41 +138,6 @@ export default function RsvpModal({ onClose }: { onClose: () => void }) {
                 {errors.whatsapp && (
                   <FieldError id="rsvp-whatsapp-err">{errors.whatsapp}</FieldError>
                 )}
-              </div>
-
-              <div data-modal-item className="mt-7">
-                <label className="flex cursor-pointer items-center gap-5 pl-1 text-[16px] leading-[1.3]">
-                  <input
-                    type="checkbox"
-                    name="acceptedTerms"
-                    aria-invalid={!!errors.acceptedTerms}
-                    className="size-[13px] shrink-0 cursor-pointer appearance-none border border-white checked:bg-white aria-invalid:border-red-500"
-                  />
-                  <span className="w-[230px] text-justify">
-                    Você aceita os{" "}
-                    <a href="#termos" className="underline underline-offset-2">
-                      termos e condições
-                    </a>{" "}
-                    da festa?
-                  </span>
-                </label>
-                {errors.acceptedTerms && (
-                  <FieldError>{errors.acceptedTerms}</FieldError>
-                )}
-              </div>
-
-              <div data-modal-item className="mt-6">
-                <label className="flex cursor-pointer items-center gap-5 pl-1 text-[16px] leading-[1.3]">
-                  <input
-                    type="checkbox"
-                    name="governmentLink"
-                    className="size-[13px] shrink-0 cursor-pointer appearance-none border border-white checked:bg-white"
-                  />
-                  <span className="text-justify">
-                    Você possui ou já possuiu algum tipo de ligação/vinculo com o Estado de Israel? (Assinale caso &ldquo;sim&rdquo; — e
-                    não minta, pois saberemos)
-                  </span>
-                </label>
               </div>
 
               {/* honeypot: invisível para pessoas */}

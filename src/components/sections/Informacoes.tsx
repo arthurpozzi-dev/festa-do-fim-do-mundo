@@ -151,7 +151,7 @@ export default function Informacoes() {
           <Star />Local
         </h2>
         <p data-reveal className={`mt-[5.5vw] md:mt-[1.5vw] ${paragraph}`}>
-          Será enviado no dia da festa para o e-mail informado no formulário de inscrição — caso
+          Será enviado no dia da festa pelo WhatsApp informado no formulário de inscrição — caso
           não o tenha preenchido:
         </p>
         <button
