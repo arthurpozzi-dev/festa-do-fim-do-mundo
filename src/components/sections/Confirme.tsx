@@ -130,6 +130,11 @@ export default function Confirme() {
           <span data-scramble>CLIQUE AQUI</span>
         </button>
 
+        {/* Rubrica embaixo do CTA */}
+        <p className="absolute top-[105.5vw] left-[14%] w-[72%] text-center font-helvetica text-[3.4vw] leading-none tracking-[0.08em] text-blood uppercase md:top-[50.6vw] md:left-[35%] md:w-[30%] md:text-[1.05vw]">
+          <span data-scramble>*Vagas limitadas</span>
+        </p>
+
         {/* Rodapé da sessão */}
         <p className="absolute top-[125vw] left-[53%] w-[45%] text-body text-white mix-blend-difference md:top-auto md:bottom-[1.5vw] md:left-auto md:right-[2%] md:w-[260px]">
           <span data-scramble className="line-justify">
